@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -46,6 +47,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     .padding(16.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
+                Header()
                 Spacer(modifier = Modifier.weight(1f))
                 CenteredLogo()
                 Spacer(modifier = Modifier.weight(1f))
@@ -56,9 +58,23 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     SimpleOutlinedTextFieldSample()
                     Spacer(modifier = Modifier.height(16.dp))
                     FilledButtonExample(onClick = { /*TODO*/ })
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Footer()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Header(modifier: Modifier = Modifier) {
+    Row(
+        modifier.fillMaxWidth(),
+    horizontalArrangement = Arrangement.SpaceBetween,
+    verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Icon")
+        Text(text = "Dynamic password")
     }
 }
 
@@ -97,7 +113,7 @@ fun SimpleOutlinedTextFieldSample(modifier: Modifier = Modifier) {
             focusedIndicatorColor = Color.Transparent,
 
         ),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         leadingIcon = {
             Text(
                 text = "57",
@@ -124,6 +140,19 @@ fun FilledButtonExample(onClick: () -> Unit, modifier: Modifier = Modifier) {
 
     ) {
         Text("Entrar")
+    }
+}
+
+@Composable
+fun Footer(modifier: Modifier = Modifier) {
+    Row( modifier
+        .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "hola")
+        Text(text = "hola")
+        Text(text = "hola")
     }
 }
 
