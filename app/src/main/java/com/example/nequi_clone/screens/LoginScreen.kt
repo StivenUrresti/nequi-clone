@@ -18,7 +18,6 @@ import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.filled.QuestionMark
-import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -182,7 +181,11 @@ fun Footer(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(Icons.Filled.QrCode, contentDescription = "Help Icon", tint = Color.White)
+            Icon(
+                Icons.Filled.QrCode,
+                contentDescription = "Help Icon",
+                tint = Color.White
+            )
             Column {
                 Text(text = "usar", color = Color.White)
                 Text(text = "codigo QR", color = Color.White)
