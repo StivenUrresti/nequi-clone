@@ -1,6 +1,7 @@
 package com.example.nequi_clone.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,8 +13,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalanceWallet
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.QrCode
+import androidx.compose.material.icons.filled.QuestionMark
+import androidx.compose.material.icons.filled.Shield
+import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -25,8 +34,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -73,8 +84,24 @@ fun Header(modifier: Modifier = Modifier) {
     horizontalArrangement = Arrangement.SpaceBetween,
     verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = "Icon")
-        Text(text = "Dynamic password")
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Icon(Icons.Filled.QuestionMark, contentDescription = "Help Icon", tint = Color.White)
+            Icon(Icons.Filled.VerifiedUser, contentDescription = "Help Icon", tint = Color.White)
+        }
+        Box(
+            Modifier
+                .background(
+                    Color(0xFF4D334D),
+                    shape = RoundedCornerShape(14.dp)
+                )
+                .padding(10.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(text = "Clave dinamica", color = Color.White)
+                Text(text = "123456", color = Color.White , fontSize = 16.sp,fontWeight = FontWeight.Bold )
+                Icon(Icons.Filled.ContentCopy, contentDescription = "Help Icon", tint = Color.White)
+            }
+        }
     }
 }
 
@@ -145,16 +172,50 @@ fun FilledButtonExample(onClick: () -> Unit, modifier: Modifier = Modifier) {
 
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
-    Row( modifier
-        .fillMaxWidth(),
+    Row(
+        modifier
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = "hola")
-        Text(text = "hola")
-        Text(text = "hola")
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(Icons.Filled.QrCode, contentDescription = "Help Icon", tint = Color.White)
+            Column {
+                Text(text = "usar", color = Color.White)
+                Text(text = "codigo QR", color = Color.White)
+            }
+        }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Icon(Icons.Filled.AccountBalanceWallet, contentDescription = "Help Icon", tint = Color.White)
+            Column {
+                Text(text = "paga en", color = Color.White)
+                Text(text = "datafono", color = Color.White)
+            }
+        }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "by", color = Color.Gray)
+            Image(
+                painter = painterResource(id = R.drawable.by_bancolombia),
+                contentDescription = "logo bancolombia",
+                modifier = Modifier
+                    .size(24.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color.Gray)
+                    .padding(4.dp)
+            )
+        }
     }
 }
+
 
 
 
