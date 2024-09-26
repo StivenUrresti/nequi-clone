@@ -1,6 +1,6 @@
-package com.example.nequi_clone.data.fake
+package com.example.nequi_clone.data.transaction
 
-import com.example.nequi_clone.data.model.Transaction
+import com.example.nequi_clone.domain.model.transaction.Transaction
 import java.util.Calendar
 
 object FakeTransactionData {

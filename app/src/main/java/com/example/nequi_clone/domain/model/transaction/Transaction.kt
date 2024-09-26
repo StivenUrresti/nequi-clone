@@ -1,4 +1,4 @@
-package com.example.nequi_clone.data.model
+package com.example.nequi_clone.domain.model.transaction
 
 data class Transaction(
     val id: Int,

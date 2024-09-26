@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandCircleDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
@@ -30,7 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.nequi_clone.data.model.Transaction
+import com.example.nequi_clone.domain.model.transaction.Transaction
 import com.example.nequi_clone.screens.viewmodel.TransactionViewModel
 
 @Composable
@@ -38,6 +37,7 @@ fun MovementsScreen(
     modifier: Modifier = Modifier,
     viewModel: TransactionViewModel = TransactionViewModel(),
 ) {
+    var searchText by remember { mutableStateOf("") }
     Surface(
         color = Color.White,
         modifier = modifier.fillMaxSize()
@@ -45,20 +45,26 @@ fun MovementsScreen(
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
             Text(text = "Movimientos", color = Color.Black)
             Spacer(modifier = Modifier.padding(8.dp))
-            SearchTextField()
+            SearchTextField(
+                value = searchText,
+                onValueChange = { searchText = it }
+            )
             Spacer(modifier = Modifier.padding(8.dp))
-            TransactionList(viewModel.transactions)
+
+            val filteredTransactions = viewModel.transactions.filter { transaction ->
+                transaction.description.contains(searchText, ignoreCase = true)
+            }
+            TransactionList(filteredTransactions)
         }
     }
 }
 
 @Composable
-fun SearchTextField(modifier: Modifier = Modifier) {
-    var text by remember { mutableStateOf("") }
+private fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier) {
 
     TextField(
-        value = text,
-        onValueChange = { text = it },
+        value = value,
+        onValueChange =  onValueChange,
         modifier = modifier
             .fillMaxWidth()
             .shadow(
