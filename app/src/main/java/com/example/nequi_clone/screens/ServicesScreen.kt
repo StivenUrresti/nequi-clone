@@ -47,12 +47,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.nequi_clone.R
 import com.example.nequi_clone.domain.model.service.Category
-import com.example.nequi_clone.screens.viewmodel.CategoryServiceViewModel
+import com.example.nequi_clone.screens.viewmodel.ServiceViewModel
 
 @Composable
 fun ServicesScreen(
     modifier : Modifier = Modifier,
-    viewModel: CategoryServiceViewModel = CategoryServiceViewModel(),
+    viewModel: ServiceViewModel = ServiceViewModel(),
 ) {
     var searchText by remember { mutableStateOf("") }
     Surface(color = Color.White,
@@ -167,7 +167,7 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier) {
                 imageVector = category.icon,
                 contentDescription = category.name,
                 modifier = Modifier.size(28.dp),
-                tint = Color(0xFFFF00FF)
+                tint = Color(0xFFDB0082)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(

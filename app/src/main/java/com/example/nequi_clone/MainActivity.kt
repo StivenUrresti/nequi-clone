@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.nequi_clone.screens.LoginScreen
 import com.example.nequi_clone.screens.MovementsScreen
+import com.example.nequi_clone.screens.NotificationScreen
 import com.example.nequi_clone.screens.ServicesScreen
 import com.example.nequi_clone.ui.theme.Nequi_cloneTheme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Nequi_cloneTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   ServicesScreen(modifier = Modifier.padding(innerPadding))
+                   NotificationScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

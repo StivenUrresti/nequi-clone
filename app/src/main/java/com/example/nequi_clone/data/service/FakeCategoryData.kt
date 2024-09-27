@@ -36,7 +36,7 @@ object FakeCategoryData {
                 icon = Icons.Filled.Home
             ),
             Category(
-                name = "Neqocios nequi",
+                name = "Negocios nequi",
                 icon = Icons.Filled.Store
             ),
             Category(
