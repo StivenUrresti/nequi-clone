@@ -1,8 +1,9 @@
 package com.example.nequi_clone.domain.model.service
 
-import androidx.compose.material.icons.Icons
+import androidx.compose.ui.graphics.vector.ImageVector
 
 data class Service(
+    val id: Int,
     val name: String,
-    val icon: Icons
+    val icon: ImageVector
 )

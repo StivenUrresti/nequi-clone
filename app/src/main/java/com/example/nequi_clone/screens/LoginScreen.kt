@@ -77,7 +77,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Header(modifier: Modifier = Modifier) {
+private fun Header(modifier: Modifier = Modifier) {
     Row(
         modifier.fillMaxWidth(),
     horizontalArrangement = Arrangement.SpaceBetween,
@@ -170,7 +170,7 @@ fun FilledButtonExample(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Footer(modifier: Modifier = Modifier) {
+private fun Footer(modifier: Modifier = Modifier) {
     Row(
         modifier
             .fillMaxWidth(),
