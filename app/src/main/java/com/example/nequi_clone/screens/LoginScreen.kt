@@ -88,7 +88,7 @@ private fun Header(modifier: Modifier = Modifier) {
             Icon(Icons.Filled.VerifiedUser, contentDescription = "Help Icon", tint = Color.White)
         }
         Box(
-            Modifier
+            modifier
                 .background(
                     Color(0xFF4D334D),
                     shape = RoundedCornerShape(14.dp)

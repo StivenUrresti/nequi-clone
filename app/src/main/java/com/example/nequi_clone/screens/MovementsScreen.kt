@@ -43,7 +43,7 @@ fun MovementsScreen(
         modifier = modifier.fillMaxSize()
     ) {
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
-            Text(text = "Movimientos", color = Color.Black)
+            Text(text = "Movimientos", color = Color.Black, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.padding(8.dp))
             SearchTextField(
                 value = searchText,

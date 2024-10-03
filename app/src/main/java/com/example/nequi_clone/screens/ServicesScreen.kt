@@ -55,21 +55,21 @@ fun ServicesScreen(
     viewModel: ServiceViewModel = ServiceViewModel(),
 ) {
     var searchText by remember { mutableStateOf("") }
-    Surface(color = Color.White,
-        modifier = modifier.fillMaxSize()) {
+    Surface(color = Color.White) {
         Column(
             modifier
                 .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .padding(12.dp)
+            ,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
                 text = "Servicios",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = modifier.padding(bottom = 14.dp)
+                color = Color.Black
             )
             SearchTextField(value = searchText,onValueChange = { searchText = it })
-            Spacer(modifier = modifier.padding(8.dp))
             val filteredCategories = viewModel.categories.filter { category ->
                 category.name.contains(searchText, ignoreCase = true)
             }
@@ -130,14 +130,15 @@ private fun ServiceList( categories: List<Category>, modifier: Modifier = Modifi
             text = "Categorias",
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
+            color = Color.Black
         )
     }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(top = 20.dp, bottom = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(18.dp),
-        horizontalArrangement = Arrangement.spacedBy(18.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(bottom = 6.dp, top = 6.dp)
     ) {
         items(categories.size) { index ->
             CategoryItem(category = categories[index])
@@ -173,10 +174,10 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier) {
             Text(
                 text = category.name,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp),
+                    .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
+                color = Color.Black
             )
         }
     }
@@ -202,8 +203,8 @@ fun CarouselImageItem(imageResId: Int, modifier: Modifier = Modifier) {
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = modifier
-            .height(160.dp)
             .width(300.dp)
+            .height(200.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Color.LightGray)
     )
