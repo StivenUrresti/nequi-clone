@@ -1,6 +1,7 @@
 package com.example.nequi_clone.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -98,28 +100,31 @@ fun CategoryButton(
         border = BorderStroke(1.dp, if (isSelected) Color.Transparent else Color.Gray),
         modifier = Modifier
             .padding(horizontal = 2.dp)
+            .wrapContentWidth()
     ) {
         Text(
-            text = "${category.name} ($notificationCount)",
+            text = "${category.name}($notificationCount)",
             color = if (isSelected) Color.White else Color.Black,
-            fontSize = 11.sp
+            fontSize = 10.sp
         )
     }
 }
+
 
 @Composable
 fun NotificationItem(notification: Notification) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .shadow(elevation = 8.dp, shape = RoundedCornerShape(8.dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = notification.title, style = MaterialTheme.typography.titleMedium)
+            Text(text = notification.title, style = MaterialTheme.typography.titleMedium, color = Color.Black)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = notification.message, style = MaterialTheme.typography.bodyLarge)
+            Text(text = notification.message, style = MaterialTheme.typography.bodyLarge, color = Color.Black)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Categoría ID: ${notification.categoryId}", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

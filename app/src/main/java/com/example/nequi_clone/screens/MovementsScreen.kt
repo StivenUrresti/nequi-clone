@@ -99,12 +99,17 @@ private fun SearchTextField(value: String, onValueChange: (String) -> Unit, modi
 @Composable
 fun TransactionList(transactions: List<Transaction>) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 20.dp),
         verticalArrangement = Arrangement.spacedBy(30.dp),
 
     ) {
         items(transactions) { transaction ->
             CardMovement(transaction)
+        }
+        item {
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }

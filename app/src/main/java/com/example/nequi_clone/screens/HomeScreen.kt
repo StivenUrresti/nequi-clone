@@ -64,7 +64,7 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = modifier
-                    .padding(16.dp)
+                    .padding(start = 16.dp, end = 16.dp, bottom = 6.dp, top = 6.dp)
                     .fillMaxWidth()
             ) {
                 Row(
@@ -72,7 +72,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(2.dp)
                 ){
 
-                    Text(text = "Segeridos nequi", fontSize = 18.sp, color = Color.Black)
+                    Text(text = "Segeridos nequi", fontSize = 16.sp, color = Color.Black)
                 }
 
             }
@@ -187,7 +187,7 @@ private fun Header(modifier: Modifier = Modifier,navController: NavHostControlle
                         Icons.Outlined.KeyboardArrowDown,
                         contentDescription = "Help Icon",
                         tint = Color.White,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(14.dp)
                     )
                 }
             }
@@ -201,12 +201,12 @@ private fun Favorites (modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = modifier
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 6.dp)
                 .fillMaxWidth()
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(2.dp)
+                horizontalArrangement = Arrangement.spacedBy(1.dp)
             ){
                 Icon(
                     Icons.Outlined.FavoriteBorder,
@@ -215,7 +215,7 @@ private fun Favorites (modifier: Modifier = Modifier) {
                     modifier = Modifier.size(28.dp)
                 )
 
-                Text(text = "Tus favoritos", fontSize = 18.sp, color = Color.Black)
+                Text(text = "Tus favoritos", fontSize = 16.sp, color = Color.Black)
             }
             Icon(
                 Icons.Outlined.ModeEdit,

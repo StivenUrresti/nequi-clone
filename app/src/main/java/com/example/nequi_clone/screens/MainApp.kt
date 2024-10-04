@@ -1,6 +1,7 @@
 package com.example.nequi_clone.screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,22 +25,56 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.nequi_clone.ui.theme.Nequi_cloneTheme
+import androidx.activity.compose.BackHandler
+import androidx.compose.material3.TextButton
 
 
+@Composable
+fun ConfirmationDialog(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Confirm Exit") },
+        text = { Text("Are you sure you want to exit the app?") },
+        confirmButton = {
+            TextButton(onClick = {
+                onConfirm()
+            }) {
+                Text("Yes")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("No")
+            }
+        }
+    )
+}
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainApp() {
     val navController = rememberNavController()
-
+    var showExitDialog by remember { mutableStateOf(false) }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
+
+    BackHandler {
+        if (currentRoute in listOf("home", "movements", "services")) {
+            showExitDialog = true
+        } else {
+            navController.popBackStack()
+        }
+    }
 
     Scaffold(
         bottomBar = {
@@ -48,13 +83,25 @@ fun MainApp() {
             }
         }
     ) {
-        NavHost(navController = navController, startDestination = "home") {
+        NavHost(navController = navController, startDestination = "login") {
+            composable("login") { LoginScreen(navController) }
+
             composable("home") { HomeScreen(navController) }
             composable("movements") { MovementsScreen(navController) }
             composable("services") { ServicesScreen(navController) }
-
             composable("profile") { ProfileScreen(navController) }
             composable("notification") { NotificationScreen(navController) }
+        }
+
+        if (showExitDialog) {
+            ConfirmationDialog(
+                onConfirm = {
+                    (navController.context as? Activity)?.finish()
+                },
+                onDismiss = {
+                    showExitDialog = false
+                }
+            )
         }
     }
 }
@@ -85,9 +132,11 @@ fun BottomNavigationBar(navController: NavHostController) {
                 Box(
                     modifier = Modifier
                         .clickable { navController.navigate(route) }
-                        .padding(vertical = 8.dp)
+                        .padding(vertical = 7.dp)
                         .background(
-                            color = if (navController.currentBackStackEntry?.destination?.route == route) Color(0xFFEAE7F5) else Color.Transparent,
+                            color = if (navController.currentBackStackEntry?.destination?.route == route) Color(
+                                0xFFEAE7F5
+                            ) else Color.Transparent,
                             shape = RoundedCornerShape(12.dp)
                         )
                         .padding(8.dp)
@@ -104,7 +153,8 @@ fun BottomNavigationBar(navController: NavHostController) {
                         )
                         Text(
                             text = items[index],
-                            color = if (navController.currentBackStackEntry?.destination?.route == route) Color(0xFF4C324B) else Color.Black
+                            fontSize = 12.sp,
+                            color = if (navController.currentBackStackEntry?.destination?.route == route) Color(0xFF4C324B) else Color.Black,
                         )
                     }
                 }
@@ -112,7 +162,7 @@ fun BottomNavigationBar(navController: NavHostController) {
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .background(Color(0xFFDB0082),  shape = RoundedCornerShape(4.dp)),
+                    .background(Color(0xFFDB0082), shape = RoundedCornerShape(4.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

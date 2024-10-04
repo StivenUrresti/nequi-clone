@@ -41,11 +41,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.nequi_clone.R
 import com.example.nequi_clone.ui.theme.Nequi_cloneTheme
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     Nequi_cloneTheme {
         Surface(
             modifier = modifier.fillMaxWidth(),
@@ -67,7 +71,11 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 ) {
                     SimpleOutlinedTextFieldSample()
                     Spacer(modifier = Modifier.height(16.dp))
-                    FilledButtonExample(onClick = { /*TODO*/ })
+                    FilledButtonExample(onClick = { navController.navigate("home")
+                    {
+                        popUpTo("login") { inclusive = true }
+                    }
+                    })
                     Spacer(modifier = Modifier.height(16.dp))
                     Footer()
                 }
@@ -220,12 +228,3 @@ private fun Footer(modifier: Modifier = Modifier) {
 }
 
 
-
-
-@Preview(showBackground = true, widthDp = 320, heightDp = 320)
-@Composable
-fun LoginScreenPreview() {
-    Nequi_cloneTheme(darkTheme = false) {
-        LoginScreen()
-    }
-}
