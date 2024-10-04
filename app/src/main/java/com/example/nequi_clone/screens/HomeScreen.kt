@@ -1,9 +1,9 @@
 package com.example.nequi_clone.screens
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,10 +20,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.QuestionMark
-import androidx.compose.material.icons.filled.VerifiedUser
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.Lock
@@ -45,32 +41,48 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.nequi_clone.R
 import com.example.nequi_clone.domain.model.service.Service
-import com.example.nequi_clone.domain.model.transaction.Transaction
 import com.example.nequi_clone.screens.viewmodel.ServiceViewModel
-import com.example.nequi_clone.screens.viewmodel.TransactionViewModel
 
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: ServiceViewModel = ServiceViewModel(),
 ) {
     Surface(modifier = modifier.fillMaxSize(), color = Color.White) {
         Column {
-            Header()
+            Header(navController= navController)
             Spacer(modifier = Modifier.height(60.dp))
             Favorites()
+            ListFavorites(viewModel.services)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                ){
+
+                    Text(text = "Segeridos nequi", fontSize = 18.sp, color = Color.Black)
+                }
+
+            }
             ListFavorites(viewModel.services)
         }
     }
 }
 
 @Composable
-private fun Header(modifier: Modifier = Modifier) {
+private fun Header(modifier: Modifier = Modifier,navController: NavHostController, ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -95,6 +107,7 @@ private fun Header(modifier: Modifier = Modifier) {
                         modifier
                             .background(color = Color(0xFF4C324B), shape = RoundedCornerShape(4.dp))
                             .padding(8.dp)
+                            .clickable{ navController.navigate("profile") }
                     ) {
                         Icon(
                             Icons.Outlined.Person,
@@ -121,7 +134,9 @@ private fun Header(modifier: Modifier = Modifier) {
                         Icons.Outlined.Notifications,
                         contentDescription = "Help Icon",
                         tint = Color.White,
-                        modifier = modifier.size(30.dp)
+                        modifier = modifier
+                            .size(30.dp)
+                            .clickable { navController.navigate("notification") }
                     )
                     Icon(
                         Icons.Outlined.QuestionMark,
@@ -200,7 +215,7 @@ private fun Favorites (modifier: Modifier = Modifier) {
                     modifier = Modifier.size(28.dp)
                 )
 
-                Text(text = "Tus favoritos", fontSize = 16.sp, color = Color.Black)
+                Text(text = "Tus favoritos", fontSize = 18.sp, color = Color.Black)
             }
             Icon(
                 Icons.Outlined.ModeEdit,
@@ -270,9 +285,3 @@ private fun CardFavorites(item: Service, modifier: Modifier = Modifier) {
 }
 
 
-
-@Preview()
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}

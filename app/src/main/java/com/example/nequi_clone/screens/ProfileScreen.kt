@@ -1,6 +1,7 @@
 package com.example.nequi_clone.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,9 +40,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
+fun ProfileScreen(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     Surface(
         modifier = modifier.fillMaxSize(),
         color = Color(0xFF1f0020)
@@ -52,7 +57,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Header(modifier = Modifier.fillMaxWidth())
+            Header(modifier = Modifier.fillMaxWidth(), navController)
             Spacer(modifier = Modifier.height(30.dp))
             Column(
                 modifier = Modifier
@@ -78,11 +83,11 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
 
 
 @Composable
-private fun Header(modifier: Modifier = Modifier) {
+private fun Header(modifier: Modifier = Modifier, navController: NavHostController,) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
-        modifier = modifier
+        modifier = modifier.clickable { navController.navigate("home") }
     ) {
         Icon(
             Icons.Filled.ArrowBack,
@@ -226,10 +231,4 @@ private fun Footer(modifier: Modifier = Modifier) {
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun ProfileScreenPreview() {
-    ProfileScreen()
-}
 

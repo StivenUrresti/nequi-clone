@@ -45,12 +45,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.nequi_clone.R
 import com.example.nequi_clone.domain.model.service.Category
 import com.example.nequi_clone.screens.viewmodel.ServiceViewModel
 
 @Composable
 fun ServicesScreen(
+    navController: NavHostController,
     modifier : Modifier = Modifier,
     viewModel: ServiceViewModel = ServiceViewModel(),
 ) {
@@ -227,9 +229,3 @@ fun ImageCarouselExample() {
 
 
 
-
-@Preview()
-@Composable
-fun ServicesScreenPreview() {
-    ServicesScreen()
-}

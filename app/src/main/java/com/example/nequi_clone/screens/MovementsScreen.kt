@@ -29,11 +29,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.nequi_clone.domain.model.transaction.Transaction
 import com.example.nequi_clone.screens.viewmodel.TransactionViewModel
 
 @Composable
 fun MovementsScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: TransactionViewModel = TransactionViewModel(),
 ) {
@@ -169,8 +171,4 @@ private fun CardMovement(transaction: Transaction, modifier: Modifier = Modifier
     }
 }
 
-@Preview()
-@Composable
-fun MovementsScreenPreview() {
-    MovementsScreen()
-}
+
