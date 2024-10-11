@@ -51,7 +51,7 @@ fun NotificationScreen(
                     tint = Color.Black,
                     modifier = Modifier.size(24.dp)
                 )
-                Text(text = "Tu perfil", color = Color.Black, fontSize = 18.sp)
+                Text(text = "Notificaciones", color = Color.Black, fontSize = 18.sp)
             }
 
             Spacer(modifier = Modifier.height(16.dp))

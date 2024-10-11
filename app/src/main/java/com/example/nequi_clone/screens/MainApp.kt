@@ -33,7 +33,21 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.nequi_clone.ui.theme.Nequi_cloneTheme
 import androidx.activity.compose.BackHandler
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowUpward
+import androidx.compose.material.icons.filled.QrCode
+import androidx.compose.material.icons.outlined.ArrowDownward
+import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 
 @Composable
@@ -113,6 +127,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Article, Icons.Outlined.GridView)
     val routes = listOf("home", "movements", "services")
 
+    // Variable para controlar la visibilidad del modal
     var showDialog by remember { mutableStateOf(false) }
 
     Box(
@@ -159,10 +174,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                     }
                 }
             }
+
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .background(Color(0xFFDB0082), shape = RoundedCornerShape(4.dp)),
+                    .background(Color(0xFFDB0082), shape = RoundedCornerShape(4.dp))
+                    .clickable {
+                        showDialog = true
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -173,6 +192,99 @@ fun BottomNavigationBar(navController: NavHostController) {
                 )
             }
         }
+    }
+
+    if (showDialog) {
+        FullScreenModal(onDismiss = {
+            showDialog = false
+        })
+    }
+}
+
+
+@Composable
+fun FullScreenModal(onDismiss: () -> Unit) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xE6FFFFFF)),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            Box(
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    ItemsModal("+ Servicios", Icons.Outlined.GridView, color = 0xFF5A9EFA)
+                    ItemsModal("Saca", Icons.Outlined.ArrowDownward, color =  0xFFDB0082)
+                    ItemsModal("Pide", Icons.Default.ArrowBack, color = 0xFFDB0082)
+                    ItemsModal("Envia", Icons.Default.ArrowForward, color = 0xFFDB0082)
+                    ItemsModal("Codigo QR", Icons.Default.QrCode, color = 0xFFDB0082)
+                    ItemsModal("Recarga Nequi", Icons.Default.ArrowUpward, color = 0xFFDB0082)
+                    Box(
+                        modifier = Modifier
+                            .shadow(
+                                elevation = 6.dp,
+                                shape = RoundedCornerShape(8.dp),
+                                clip = false
+                            )
+                            .background(
+                                Color(0xFFECE7F5),
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(12.dp)
+                            .clickable { onDismiss() }
+                        ,
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            Icons.Outlined.Close,
+                            contentDescription = "hola",
+                            tint = Color.Black,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ItemsModal(
+    text: String,
+    icon: ImageVector,
+    color: Long,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier.padding(top = 10.dp, bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(text = text, color = Color.Black)
+        Box(
+            modifier = modifier
+                .background(
+                    Color(color),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .padding(10.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = text,
+                tint = Color.White,
+                modifier = modifier.size(24.dp)
+            )
+        }
+
     }
 }
 
